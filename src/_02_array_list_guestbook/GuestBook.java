@@ -1,5 +1,6 @@
 package _02_array_list_guestbook;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -24,12 +26,23 @@ public class GuestBook implements ActionListener{
 	JPanel panel = new JPanel();
 	JButton addNamesButton = new JButton("Add Name");
 	JButton viewNamesButton = new JButton("View Names");
-	JTextField txtInput = new JTextField(10);
+	JTextField txtInput = new JTextField("Add Guest here.", 10);
 	JLabel label = new JLabel();
 	ArrayList<String> arrList = new ArrayList<String>();
 	
 	public void run() {
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		addNamesButton.addActionListener(this);
+		viewNamesButton.addActionListener(this);
+		
+		//txtInput.setBackground(Color.);
+		panel.add(txtInput);
+		panel.add(addNamesButton);
+		panel.add(viewNamesButton);
+		frame.add(panel);
+		frame.pack();
 	}
 
 	@Override
@@ -37,9 +50,10 @@ public class GuestBook implements ActionListener{
 		JButton buttonPressed = (JButton) e.getSource();
 		
 		if(buttonPressed == addNamesButton ) {
-			label.add(txtInput);
+			arrList.add(txtInput.getText());
+			txtInput.setText("Add another guest");
 		} else if (buttonPressed == viewNamesButton) {
-			label.add(arrList.iterator());
+			JOptionPane.showMessageDialog(null, "Guest list: " + arrList.toString(), "Names in list", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
